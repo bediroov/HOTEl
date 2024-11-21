@@ -11,6 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/customers")
 @RequiredArgsConstructor
+
+
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -26,16 +28,19 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
+
     // bu get pathvariable ucun
     @GetMapping("/{customerId}")
     public CustomerResponse getCustomer(@PathVariable Long customerId) {
         return customerService.getCustomerById(customerId);
     }
 
+
     @PutMapping("/{customerId}")
     public CustomerResponse putCustomer(@RequestBody CustomerRequest customerRequest, @PathVariable Long customerId) {
         return customerService.updateCustomer(customerRequest, customerId);
     }
+
 
     @DeleteMapping("/{customerId}")
     public void deleteCustomer(@PathVariable Long customerId) {

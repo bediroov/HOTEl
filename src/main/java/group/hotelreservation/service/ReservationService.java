@@ -1,5 +1,10 @@
 package group.hotelreservation.service;
+import group.hotelreservation.dao.entity.CustomerEntity;
+import group.hotelreservation.dao.entity.ReservationEntity;
+import group.hotelreservation.dao.entity.RoomEntity;
+import group.hotelreservation.dao.repository.CustomerRepository;
 import group.hotelreservation.dao.repository.ReservationRepository;
+import group.hotelreservation.dao.repository.RoomRepository;
 import group.hotelreservation.dto.reservation.request.ReservationRequest;
 import group.hotelreservation.dto.reservation.response.ReservationResponse;
 import group.hotelreservation.mapper.ReservationMapper;
@@ -9,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+
 @Service
 @RequiredArgsConstructor
 public class ReservationService {
@@ -16,9 +22,11 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final ReservationMapper reservationMapper;
 
+    private final RoomRepository roomRepository;
+    private final CustomerRepository customerRepository;
+
 
     public ReservationResponse addReservation(ReservationRequest reservationRequest) {
-
         var reservationentity = reservationMapper.mapToReservationEntity(reservationRequest);
         reservationRepository.save(reservationentity);
         var response = reservationMapper.mapToReservationResponse(reservationentity);
@@ -26,10 +34,28 @@ public class ReservationService {
         return response;
     }
 
+
+    public ReservationResponse createReservation(ReservationRequest reservationRequest) {
+        RoomEntity room = roomRepository.findById(reservationRequest.getRoomId()).orElseThrow(() -> {
+            throw new RuntimeException("ROOM_NOT_FOUND");
+        });
+
+        CustomerEntity customer = customerRepository.findById(reservationRequest.getCustomerId()).orElseThrow(()->{
+            throw new RuntimeException("Customer not found");
+        });
+
+        ReservationEntity reservation = reservationMapper.mapToReservationEntity(reservationRequest);
+        reservation.setRoom(room);
+        reservation.setCustomer(customer);
+        reservationRepository.save(reservation);
+        return reservationMapper.mapToReservationResponse(reservation);
+    }
+
     public List<ReservationResponse> getAllReservations() {
         var reservationEntityList = reservationRepository.findAll();
         return reservationEntityList.stream().map(reservationMapper::mapToReservationResponse).collect(Collectors.toList());
     }
+
 
     public ReservationResponse getReservationById(Long reservationId) {
 
@@ -56,4 +82,6 @@ public class ReservationService {
         reservationRepository.deleteById(reservationId);
 
     }
+
+
 }

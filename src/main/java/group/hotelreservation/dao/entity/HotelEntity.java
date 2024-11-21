@@ -5,8 +5,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.List;
+
+
 
 @Entity
 @Table(name = "hotels")
@@ -39,5 +40,7 @@ public class HotelEntity {
     @OneToMany(mappedBy = "hotel",cascade = CascadeType.ALL)
     @JsonBackReference
     private List<ReceptionistEntity> receptionists;
+
+
 
 }

@@ -1,11 +1,11 @@
 package group.hotelreservation.controller;
-import group.hotelreservation.dto.customer.response.CustomerResponse;
 import group.hotelreservation.dto.hotel.request.HotelRequest;
 import group.hotelreservation.dto.hotel.response.HotelResponse;
 import group.hotelreservation.service.HotelService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/hotel")
@@ -21,13 +21,11 @@ public class HotelController {
         return hotelService.addHotelwithRooms(hotelRequest);
     }
 
-
 //     bu get pathvariable ucun
     @GetMapping("/{hotelId}")
     public HotelResponse getHotel(@PathVariable Long hotelId) {
         return hotelService.getHotelbyId(hotelId);
     }
-
 
 
     @PutMapping("/{hotelId}")
@@ -40,6 +38,7 @@ public class HotelController {
     public void deleteHotel(@PathVariable Long hotelId) {
         hotelService.deleteCustomer(hotelId);
     }
+
 
 
 }

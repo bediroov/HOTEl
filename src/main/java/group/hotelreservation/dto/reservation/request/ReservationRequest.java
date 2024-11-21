@@ -2,8 +2,9 @@ package group.hotelreservation.dto.reservation.request;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
+
+
 
 @Data
 @NoArgsConstructor
@@ -11,6 +12,9 @@ import java.time.LocalDateTime;
 
 public class ReservationRequest {
 
+    private Long roomId;
+
+    private Long customerId;
 
     private LocalDateTime checkInDate;
 
@@ -21,6 +25,5 @@ public class ReservationRequest {
     private boolean status;
 
     private String paymentMethod; // Ödəmə metodu (məsələn, "credit card")
-
 
 }

@@ -5,8 +5,8 @@ import group.hotelreservation.service.ReservationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/reservations")
@@ -17,11 +17,16 @@ public class ReservationController {
 
     private final ReservationService reservationService;
 
+    @PostMapping("/v2")
+    public ReservationResponse createReservation(@RequestBody @Valid ReservationRequest reservationRequest){
+        return reservationService.createReservation(reservationRequest);
+    }
+
+
     @PostMapping
     public ReservationResponse saveReservations(@RequestBody @Valid ReservationRequest reservationRequest) {
         return reservationService.addReservation(reservationRequest);
     }
-
 
     @GetMapping
     public List<ReservationResponse> getAllReservations() {

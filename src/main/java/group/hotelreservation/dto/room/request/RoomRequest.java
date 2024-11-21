@@ -17,6 +17,8 @@ import java.util.List;
 
 public class RoomRequest {
 
+    private Long hotelId;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private RoomType roomType;  // meselen tek neferlik 2 neferlik olacagmi

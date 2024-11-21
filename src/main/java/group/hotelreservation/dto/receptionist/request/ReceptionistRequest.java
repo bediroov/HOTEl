@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class ReceptionistRequest {
 
+    private Long hotelId;
 
     private String name;
     private String surname;

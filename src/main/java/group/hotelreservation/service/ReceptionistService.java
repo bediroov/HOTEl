@@ -1,76 +1,73 @@
-//package group.hotelreservation.service;
-//
-//import group.hotelreservation.dao.repository.RoomRepository;
-//import group.hotelreservation.dto.receptionist.request.ReceptionistRequest;
-//import group.hotelreservation.dto.receptionist.response.ReceptionistResponse;
-//import group.hotelreservation.dto.room.request.RoomRequest;
-//import group.hotelreservation.dto.room.response.RoomResponse;
-//import group.hotelreservation.mapper.ReceptionistMapper;
-//import group.hotelreservation.mapper.RoomMapper;
-//import lombok.RequiredArgsConstructor;
-//import org.springframework.stereotype.Service;
-//
-//import java.util.List;
-//import java.util.stream.Collectors;
-//
-//@Service
-//@RequiredArgsConstructor
-//
-//public class ReceptionistService {
-//
-//
-//    private final ReceptionistService receptionistService;
-//    private final ReceptionistMapper receptionistMapper;
-//
-//
-//    public RoomResponse addRoomWithReservations(RoomRequest roomRequest) {
-//        var roomEntity = roomMapper.mapToRoomEntity(roomRequest);
-//
-//        if (roomEntity.getReservations() != null) {
-//            roomEntity.getReservations().forEach(reservation->reservation.setRoom(roomEntity));
-//        }
-//
-//        roomRepository.save(roomEntity);
-//        var response = roomMapper.mapToRoomResponse(roomEntity);
-//        System.out.println("response:" + response);
-//        return response;
-//    }
-//
-//    public List<RoomResponse> getAllRooms() {
-//        var roomEntityList = roomRepository.findAll();
-//        return roomEntityList.stream().map(roomMapper::mapToRoomResponse).collect(Collectors.toList());
-//    }
-//
-//    public RoomResponse getRoomById(Long roomId) {
-//        var roomEntity = roomRepository.findById(roomId)
-//                .orElseThrow(() -> new RuntimeException("Room not found"));
-//        return roomMapper.mapToRoomResponse(roomEntity);
-//    }
-//
-//    public RoomResponse updateRoom(RoomRequest roomRequest, Long roomId) {
-//
-//        var existRoom = roomRepository.findById(roomId)
-//                .orElseThrow(() -> new RuntimeException("Room not Found"));
-//
-//        existRoom.setRoomType(roomRequest.getRoomType());
-//        existRoom.setPrice(roomRequest.getPrice());
-//        existRoom.setStatus(roomRequest.isStatus());
-//
-//        roomRepository.save(existRoom);
-//        return roomMapper.mapToRoomResponse(existRoom);
-//    }
-//
-//    public void deleteRoom(Long roomId) {
-//        roomRepository.deleteById(roomId);
-//
-//    }
-//
-//    public ReceptionistResponse addReceptionists(ReceptionistRequest receptionistRequest) {
-//    }
-//
-//    public List<ReceptionistResponse> getAllReceptionists() {
-//    }
-//
-//    public ReceptionistResponse getReceptionistById(Long receptionistId) {
-//    }
-//}
+package group.hotelreservation.service;
+import group.hotelreservation.dao.entity.HotelEntity;
+import group.hotelreservation.dao.entity.ReceptionistEntity;
+import group.hotelreservation.dao.repository.HotelRepository;
+import group.hotelreservation.dao.repository.ReceptionistRepository;
+import group.hotelreservation.dto.receptionist.request.ReceptionistRequest;
+import group.hotelreservation.dto.receptionist.response.ReceptionistResponse;
+import group.hotelreservation.mapper.ReceptionistMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.stream.Collectors;
+
+
+
+@Service
+@RequiredArgsConstructor
+
+public class ReceptionistService {
+
+    private final ReceptionistRepository receptionistRepository;
+
+    private final ReceptionistMapper receptionistMapper;
+
+    private final HotelRepository hotelRepository;
+
+
+    public ReceptionistResponse addReceptionists(ReceptionistRequest receptionistRequest) {
+
+        HotelEntity hotel = hotelRepository.findById(receptionistRequest.getHotelId())
+                .orElseThrow(() -> new RuntimeException("Hotel not found"));
+
+        ReceptionistEntity receptionist = receptionistMapper.mapToReceptionistEntity(receptionistRequest);
+
+        receptionist.setHotel(hotel);
+        receptionistRepository.save(receptionist);
+        return receptionistMapper.mapToReceptionistResponse(receptionist);
+
+    }
+
+    public List<ReceptionistResponse> getAllReceptionists() {
+        var receptionEntityList = receptionistRepository.findAll();
+        return receptionEntityList.stream().map(receptionistMapper::mapToReceptionistResponse).collect(Collectors.toList());
+    }
+
+    public ReceptionistResponse getReceptionistById(Long receptionistId) {
+        var receptionistEntity = receptionistRepository.findById(receptionistId)
+                .orElseThrow(() -> new RuntimeException("RECEPTIONIST not found"));
+        return receptionistMapper.mapToReceptionistResponse(receptionistEntity);
+    }
+
+
+    public ReceptionistResponse updateReceptionist(ReceptionistRequest receptionistRequest, Long receptionistId) {
+
+        var existReceptionist = receptionistRepository.findById(receptionistId)
+                .orElseThrow(() -> new RuntimeException("RECEPTIONIST not Found"));
+
+        existReceptionist.setName(receptionistRequest.getName());
+        existReceptionist.setSurname(receptionistRequest.getSurname());
+        existReceptionist.setEmail(receptionistRequest.getEmail());
+        existReceptionist.setPassword(receptionistRequest.getPassword());
+
+        receptionistRepository.save(existReceptionist);
+        return receptionistMapper.mapToReceptionistResponse(existReceptionist);
+
+    }
+
+    public void deleteReceptionist(Long receptionistId) {
+        receptionistRepository.deleteById(receptionistId);
+    }
+
+
+}
