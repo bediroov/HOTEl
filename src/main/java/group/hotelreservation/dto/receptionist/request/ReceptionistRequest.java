@@ -1,5 +1,6 @@
 package group.hotelreservation.dto.receptionist.request;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 public class ReceptionistRequest {
 
+    @NotNull
     private Long hotelId;
 
     private String name;

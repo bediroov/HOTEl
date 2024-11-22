@@ -11,7 +11,7 @@ import java.util.List;
 public abstract class CustomerMapper {
 
     // CustomerRequest obyektini CustomerEntity obyektinə çevirmək üçün metod
-    @Mapping(source = "reservations",target = "reservations")
+//    @Mapping(source = "reservations",target = "reservations")
     public abstract CustomerEntity mapToEntity(CustomerRequest customerRequest);
 
 

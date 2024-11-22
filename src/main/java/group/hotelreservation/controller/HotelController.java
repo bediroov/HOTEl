@@ -17,8 +17,8 @@ public class HotelController {
     private final HotelService hotelService;
 
     @PostMapping
-    public HotelResponse saveAllCustomers(@RequestBody @Valid HotelRequest hotelRequest) {
-        return hotelService.addHotelwithRooms(hotelRequest);
+    public HotelResponse saveHotel(@RequestBody @Valid HotelRequest hotelRequest) {
+        return hotelService.createHotel(hotelRequest);
     }
 
 //     bu get pathvariable ucun

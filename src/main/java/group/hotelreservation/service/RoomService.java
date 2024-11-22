@@ -8,8 +8,10 @@ import group.hotelreservation.dto.room.response.RoomResponse;
 import group.hotelreservation.mapper.RoomMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 
 @Service
@@ -21,14 +23,13 @@ public class RoomService {
 
     private final HotelRepository hotelRepository;
 
-
-    public RoomResponse addRoom(RoomRequest roomRequest) {
+    @Transactional
+    public RoomResponse saveRoom(RoomRequest roomRequest) {
 
         HotelEntity hotel = hotelRepository.findById(roomRequest.getHotelId())
                 .orElseThrow(() -> new RuntimeException("Hotel not found"));
 
         RoomEntity room = roomMapper.mapToRoomEntity(roomRequest);
-
         room.setHotel(hotel);
         roomRepository.save(room);
         return roomMapper.mapToRoomResponse(room);

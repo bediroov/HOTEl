@@ -4,6 +4,7 @@ import group.hotelreservation.enums.RoomType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class RoomRequest {
 
+    @NotNull
     private Long hotelId;
 
     @Column(nullable = false)
@@ -27,6 +29,6 @@ public class RoomRequest {
 
     private boolean status;
 
-    private List<ReservationRequest> reservations;
+//    private List<ReservationRequest> reservations;
 
 }

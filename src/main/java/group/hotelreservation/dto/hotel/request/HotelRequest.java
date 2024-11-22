@@ -1,7 +1,6 @@
 package group.hotelreservation.dto.hotel.request;
 
 
-import group.hotelreservation.dao.entity.RoomEntity;
 import group.hotelreservation.dto.room.request.RoomRequest;
 import group.hotelreservation.enums.HotelStars;
 import jakarta.persistence.EnumType;
@@ -29,5 +28,5 @@ public class HotelRequest {
     @Enumerated(EnumType.STRING)
     private HotelStars stars;
 
-    private List<RoomRequest> rooms;
+//    private List<RoomRequest> rooms;
 }

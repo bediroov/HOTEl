@@ -1,12 +1,11 @@
 package group.hotelreservation.service;
+import group.hotelreservation.dao.entity.HotelEntity;
 import group.hotelreservation.dao.repository.HotelRepository;
 import group.hotelreservation.dto.hotel.request.HotelRequest;
 import group.hotelreservation.dto.hotel.response.HotelResponse;
 import group.hotelreservation.mapper.HotelMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-
 
 
 @Service
@@ -16,23 +15,11 @@ public class HotelService {
     private final HotelRepository hotelRepository;
     private final HotelMapper hotelMapper;
 
-
-    public HotelResponse addHotelwithRooms(HotelRequest hotelRequest) {
-
-        var hotelEntity = hotelMapper.mapToHotelEntity(hotelRequest);
-
-        // her bir otagin hotel sahesini teyin etmeliyik!!!
-
-        if (hotelEntity.getRooms() != null) {
-            hotelEntity.getRooms().forEach(room -> room.setHotel(hotelEntity));
-        }
-
+    public HotelResponse createHotel(HotelRequest hotelRequest) {
+        HotelEntity hotelEntity = hotelMapper.mapToHotelEntity(hotelRequest);
         hotelRepository.save(hotelEntity);
-        var response = hotelMapper.mapToHotelResponse(hotelEntity);
-        System.out.println("responsehotel:" + response);
-        return response;
+        return hotelMapper.mapToHotelResponse(hotelEntity);
     }
-
 
     public HotelResponse getHotelbyId(Long hotelId) {
         var hotelEntity = hotelRepository.findById(hotelId)
@@ -51,11 +38,12 @@ public class HotelService {
 
         hotelRepository.save(existHotel);
         return hotelMapper.mapToHotelResponse(existHotel);
-
     }
+
 
     public void deleteCustomer(Long hotelId) {
         hotelRepository.deleteById(hotelId);
-
     }
+
+
 }

@@ -34,7 +34,7 @@ public class CustomerRequest {
     private String phonenumber;
 
 
-    private List<ReservationRequest> reservations;
+//    private List<ReservationRequest> reservations;
 
 
 }

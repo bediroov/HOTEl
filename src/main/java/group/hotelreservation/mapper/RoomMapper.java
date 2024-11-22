@@ -10,7 +10,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring",uses = ReservationMapper.class)
 public abstract class RoomMapper {
 
-    @Mapping(source = "reservations",target = "reservations")
+//    @Mapping(source = "reservations",target = "reservations")
     public abstract RoomEntity mapToRoomEntity(RoomRequest roomRequest);
 
     @Mapping(source = "reservations",target = "reservations")

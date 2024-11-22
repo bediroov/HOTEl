@@ -22,7 +22,7 @@ public class RoomController {
 
     @PostMapping
     public RoomResponse saveRooms(@RequestBody @Valid RoomRequest roomRequest) {
-        return roomService.addRoom(roomRequest);
+        return roomService.saveRoom(roomRequest);
     }
 
 

@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 
 
+
 @Service
 @RequiredArgsConstructor
 
@@ -23,6 +24,7 @@ public class ReceptionistService {
     private final ReceptionistMapper receptionistMapper;
 
     private final HotelRepository hotelRepository;
+
 
 
     public ReceptionistResponse addReceptionists(ReceptionistRequest receptionistRequest) {
@@ -36,12 +38,14 @@ public class ReceptionistService {
         receptionistRepository.save(receptionist);
         return receptionistMapper.mapToReceptionistResponse(receptionist);
 
+
     }
 
     public List<ReceptionistResponse> getAllReceptionists() {
         var receptionEntityList = receptionistRepository.findAll();
         return receptionEntityList.stream().map(receptionistMapper::mapToReceptionistResponse).collect(Collectors.toList());
     }
+
 
     public ReceptionistResponse getReceptionistById(Long receptionistId) {
         var receptionistEntity = receptionistRepository.findById(receptionistId)
@@ -59,6 +63,7 @@ public class ReceptionistService {
         existReceptionist.setSurname(receptionistRequest.getSurname());
         existReceptionist.setEmail(receptionistRequest.getEmail());
         existReceptionist.setPassword(receptionistRequest.getPassword());
+
 
         receptionistRepository.save(existReceptionist);
         return receptionistMapper.mapToReceptionistResponse(existReceptionist);
