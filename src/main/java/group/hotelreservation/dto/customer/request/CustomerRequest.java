@@ -24,7 +24,7 @@ public class CustomerRequest {
     @NotBlank(message = "surname can't be empty")
     private String surname;
 
-    @Min(18)
+//    @Min(18)
     private Integer age;
 
     @Email(message = "email must be written @signature")

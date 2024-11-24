@@ -5,6 +5,7 @@ import group.hotelreservation.dao.repository.HotelRepository;
 import group.hotelreservation.dao.repository.RoomRepository;
 import group.hotelreservation.dto.room.request.RoomRequest;
 import group.hotelreservation.dto.room.response.RoomResponse;
+import group.hotelreservation.exceptions.NotFoundException;
 import group.hotelreservation.mapper.RoomMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,7 @@ public class RoomService {
 
     public RoomResponse getRoomById(Long roomId) {
         var roomEntity = roomRepository.findById(roomId)
-                .orElseThrow(() -> new RuntimeException("Room not found"));
+                .orElseThrow(() -> new NotFoundException("Room not found ","Room not found:" + roomId));
         return roomMapper.mapToRoomResponse(roomEntity);
     }
 

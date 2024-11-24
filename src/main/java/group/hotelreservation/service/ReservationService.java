@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-
 @Service
 @RequiredArgsConstructor
 public class ReservationService {
@@ -25,14 +24,6 @@ public class ReservationService {
     private final RoomRepository roomRepository;
     private final CustomerRepository customerRepository;
 
-
-    public ReservationResponse addReservation(ReservationRequest reservationRequest) {
-        var reservationentity = reservationMapper.mapToReservationEntity(reservationRequest);
-        reservationRepository.save(reservationentity);
-        var response = reservationMapper.mapToReservationResponse(reservationentity);
-        System.out.println("response:" + response);
-        return response;
-    }
 
 
     public ReservationResponse createReservation(ReservationRequest reservationRequest) {

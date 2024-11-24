@@ -8,14 +8,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
+
+
 @RestController
 @RequestMapping("/reservations")
 @RequiredArgsConstructor
 
 
+
 public class ReservationController {
 
     private final ReservationService reservationService;
+
 
     @PostMapping("/v2")
     public ReservationResponse createReservation(@RequestBody @Valid ReservationRequest reservationRequest){
@@ -23,10 +27,6 @@ public class ReservationController {
     }
 
 
-    @PostMapping
-    public ReservationResponse saveReservations(@RequestBody @Valid ReservationRequest reservationRequest) {
-        return reservationService.addReservation(reservationRequest);
-    }
 
     @GetMapping
     public List<ReservationResponse> getAllReservations() {
