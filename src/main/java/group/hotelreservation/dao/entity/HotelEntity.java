@@ -1,20 +1,20 @@
 package group.hotelreservation.dao.entity;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import group.hotelreservation.enums.HotelStars;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.List;
 
 
 
-@Entity
-@Table(name = "hotels")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
+@Entity
+@Table(name = "hotel")
 public class HotelEntity {
 
 
@@ -22,25 +22,27 @@ public class HotelEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+
     private String address;
-    @Column(nullable = false)
-
-    @Enumerated(EnumType.STRING)
-    private HotelStars stars;
-
-    @OneToMany(mappedBy = "hotel",cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<RoomEntity> rooms;
 
 
-    @OneToMany(mappedBy = "hotel",cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<ReceptionistEntity> receptionists;
+//    @Enumerated(EnumType.ORDINAL)
+//    private HotelStars stars;
 
+    private String stars;
+
+//    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+//    @JsonBackReference
+//    private List<RoomEntity> rooms;
+//
+//
+//    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+//    @JsonBackReference
+//    private List<ReceptionistEntity> receptionists;
 
 
 }

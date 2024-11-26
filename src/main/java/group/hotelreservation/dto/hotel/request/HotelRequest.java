@@ -18,15 +18,16 @@ import java.util.List;
 
 public class HotelRequest {
 
-    @NotBlank(message = "name can not be empty")
 
+    @NotBlank(message = "name can not be empty")
     private String name;
-    @NotBlank(message = "address can not be empty")
 
     private String address;
 
-    @Enumerated(EnumType.STRING)
-    private HotelStars stars;
+//    @Enumerated(EnumType.STRING)
+//    private HotelStars stars;
+      private String stars;
+
 
 //    private List<RoomRequest> rooms;
 }

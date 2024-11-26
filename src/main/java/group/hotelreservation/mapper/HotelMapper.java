@@ -14,7 +14,7 @@ public abstract class HotelMapper {
 //    @Mapping(source = "rooms",target = "rooms")
     public abstract HotelEntity mapToHotelEntity(HotelRequest hotelRequest);
 
-    @Mapping(source = "rooms",target = "rooms")
+//    @Mapping(source = "rooms",target = "rooms")
     public abstract HotelResponse mapToHotelResponse(HotelEntity hotelEntity);
 
 

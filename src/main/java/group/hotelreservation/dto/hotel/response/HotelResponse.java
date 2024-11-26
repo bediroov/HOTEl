@@ -27,8 +27,12 @@ public class HotelResponse {
 
     private String address;
 
-    @Enumerated(EnumType.STRING)
-    private HotelStars stars;
+//    private String city;
+
+    private String stars;
+
+//    @Enumerated(EnumType.STRING)
+//    private HotelStars stars;
 
     private List<RoomResponse> rooms;
 
