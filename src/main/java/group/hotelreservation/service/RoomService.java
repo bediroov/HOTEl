@@ -44,14 +44,14 @@ public class RoomService {
     }
 
 
-    public RoomResponse getRoomById(Long roomId) {
+    public RoomResponse getRoomById(String roomId) {
         var roomEntity = roomRepository.findById(roomId)
-                .orElseThrow(() -> new NotFoundException("Room not found ","Room not found:" + roomId));
+                .orElseThrow(() -> new NotFoundException("Room not found %s ","Room not found: " + roomId));
         return roomMapper.mapToRoomResponse(roomEntity);
     }
 
 
-    public RoomResponse updateRoom(RoomRequest roomRequest, Long roomId) {
+    public RoomResponse updateRoom(RoomRequest roomRequest, String roomId) {
 
         var existRoom = roomRepository.findById(roomId)
                 .orElseThrow(() -> new RuntimeException("Room not Found"));
@@ -64,7 +64,7 @@ public class RoomService {
         return roomMapper.mapToRoomResponse(existRoom);
     }
 
-    public void deleteRoom(Long roomId) {
+    public void deleteRoom(String  roomId) {
         roomRepository.deleteById(roomId);
     }
 

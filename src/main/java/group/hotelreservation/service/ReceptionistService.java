@@ -27,7 +27,7 @@ public class ReceptionistService {
 
 
 
-    public ReceptionistResponse addReceptionists(ReceptionistRequest receptionistRequest) {
+        public ReceptionistResponse addReceptionists(ReceptionistRequest receptionistRequest) {
 
         HotelEntity hotel = hotelRepository.findById(receptionistRequest.getHotelId())
                 .orElseThrow(() -> new RuntimeException("Hotel not found"));

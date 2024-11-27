@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 public class ReservationRequest {
 
-    private Long roomId;
+    private String roomId;
 
     private Long customerId;
 

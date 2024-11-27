@@ -7,6 +7,7 @@ import org.mapstruct.Mapping;
 
 
 
+
 @Mapper(componentModel = "spring",uses = ReservationMapper.class)
 public abstract class RoomMapper {
 
@@ -15,5 +16,7 @@ public abstract class RoomMapper {
 
     @Mapping(source = "reservations",target = "reservations")
     public abstract RoomResponse mapToRoomResponse(RoomEntity roomEntity);
+
+
 
 }

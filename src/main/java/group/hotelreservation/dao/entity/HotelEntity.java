@@ -1,8 +1,10 @@
 package group.hotelreservation.dao.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import group.hotelreservation.enums.HotelStars;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 
@@ -19,8 +21,8 @@ public class HotelEntity {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
 
     @Column(nullable = false)
@@ -30,10 +32,9 @@ public class HotelEntity {
     private String address;
 
 
-//    @Enumerated(EnumType.ORDINAL)
-//    private HotelStars stars;
+    @Enumerated(EnumType.STRING)
+    private HotelStars stars;
 
-    private String stars;
 
 //    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
 //    @JsonBackReference

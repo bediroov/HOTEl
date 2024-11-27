@@ -24,10 +24,6 @@ public class CustomerService {
     public CustomerResponse addCustomerwithReservation(CustomerRequest customerRequest) {
         var customerEntity = customerMapper.mapToEntity(customerRequest);
 
-        if (customerEntity.getReservations() != null) {
-            customerEntity.getReservations().forEach(reservation -> reservation.setCustomer(customerEntity));
-
-        }
         customerRepository.save(customerEntity);
         var response = customerMapper.mapToResponse(customerEntity);
         System.out.println("response:" + response);

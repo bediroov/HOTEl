@@ -18,24 +18,27 @@ public class HotelController {
 
     @PostMapping
     public HotelResponse saveHotel(@RequestBody @Valid HotelRequest hotelRequest) {
+
+        System.out.println("stars:" + hotelRequest.getStars());
+
         return hotelService.createHotel(hotelRequest);
     }
 
 //     bu get pathvariable ucun
     @GetMapping("/{hotelId}")
-    public HotelResponse getHotel(@PathVariable Long hotelId) {
+    public HotelResponse getHotel(@PathVariable String hotelId) {
         return hotelService.getHotelbyId(hotelId);
     }
 
 
     @PutMapping("/{hotelId}")
-    public HotelResponse putHotel(@RequestBody HotelRequest hotelRequest, @PathVariable Long hotelId) {
+    public HotelResponse putHotel(@RequestBody HotelRequest hotelRequest, @PathVariable String hotelId) {
         return hotelService.updateHotel(hotelRequest, hotelId);
     }
 
 
     @DeleteMapping("/{hotelId}")
-    public void deleteHotel(@PathVariable Long hotelId) {
+    public void deleteHotel(@PathVariable String hotelId) {
         hotelService.deleteCustomer(hotelId);
     }
 

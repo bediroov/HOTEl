@@ -21,18 +21,15 @@ import java.util.List;
 public class HotelResponse {
 
 
-    private Long id;
+    private String id;
 
     private String name;
 
     private String address;
 
-//    private String city;
 
-    private String stars;
-
-//    @Enumerated(EnumType.STRING)
-//    private HotelStars stars;
+    @Enumerated(EnumType.STRING)
+    private HotelStars stars;
 
     private List<RoomResponse> rooms;
 

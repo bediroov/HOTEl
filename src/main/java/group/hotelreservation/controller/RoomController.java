@@ -33,17 +33,17 @@ public class RoomController {
 
     // bu get pathvariable ucun
     @GetMapping("/{roomId}")
-    public RoomResponse getRoomById(@PathVariable Long roomId) {
+    public RoomResponse getRoomById(@PathVariable String roomId) {
         return roomService.getRoomById(roomId);
     }
 
     @PutMapping("/{roomId}")
-    public RoomResponse putRoom(@RequestBody RoomRequest roomRequest, @PathVariable Long roomId) {
+    public RoomResponse putRoom(@RequestBody RoomRequest roomRequest, @PathVariable String roomId) {
         return roomService.updateRoom(roomRequest, roomId);
     }
 
     @DeleteMapping("/{roomId}")
-    public void deleteRoom(@PathVariable Long roomId) {
+    public void deleteRoom(@PathVariable String roomId) {
         roomService.deleteRoom(roomId);
     }
 

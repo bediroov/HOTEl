@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ReceptionistRequest {
 
     @NotNull
-    private Long hotelId;
+    private String hotelId;
 
     private String name;
     private String surname;

@@ -23,14 +23,14 @@ public class HotelService {
         return hotelMapper.mapToHotelResponse(hotelEntity);
     }
 
-    public HotelResponse getHotelbyId(Long hotelId) {
+    public HotelResponse getHotelbyId(String hotelId) {
         var hotelEntity = hotelRepository.findById(hotelId)
                 .orElseThrow(() -> new RuntimeException("Hotel not found"));
         return hotelMapper.mapToHotelResponse(hotelEntity);
     }
 
 
-    public HotelResponse updateHotel(HotelRequest hotelRequest, Long hotelId) {
+    public HotelResponse updateHotel(HotelRequest hotelRequest, String hotelId) {
         var existHotel = hotelRepository.findById(hotelId).orElseThrow(() ->
                 new RuntimeException("Hotel not found!!!"));
 
@@ -43,7 +43,7 @@ public class HotelService {
     }
 
 
-    public void deleteCustomer(Long hotelId) {
+    public void deleteCustomer(String hotelId) {
         hotelRepository.deleteById(hotelId);
     }
 

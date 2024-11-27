@@ -1,5 +1,4 @@
 package group.hotelreservation.dto.room.request;
-import group.hotelreservation.dto.reservation.request.ReservationRequest;
 import group.hotelreservation.enums.RoomType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
@@ -9,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,9 +17,10 @@ import java.util.List;
 public class RoomRequest {
 
     @NotNull
-    private Long hotelId;
+    @Column(name = "hotel_id")
+    private String hotelId;
 
-    @Column(nullable = false)
+    @Column(name = "room_type" , nullable = false)
     @Enumerated(EnumType.STRING)
     private RoomType roomType;  // meselen tek neferlik 2 neferlik olacagmi
 

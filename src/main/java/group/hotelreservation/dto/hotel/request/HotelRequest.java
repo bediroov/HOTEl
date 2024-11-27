@@ -1,7 +1,4 @@
 package group.hotelreservation.dto.hotel.request;
-
-
-import group.hotelreservation.dto.room.request.RoomRequest;
 import group.hotelreservation.enums.HotelStars;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -10,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -24,10 +20,7 @@ public class HotelRequest {
 
     private String address;
 
-//    @Enumerated(EnumType.STRING)
-//    private HotelStars stars;
-      private String stars;
+    @Enumerated(EnumType.STRING)
+    private HotelStars stars;
 
-
-//    private List<RoomRequest> rooms;
 }
