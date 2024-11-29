@@ -10,6 +10,11 @@ import group.hotelreservation.dto.reservation.response.ReservationResponse;
 import group.hotelreservation.mapper.ReservationMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -71,6 +76,34 @@ public class ReservationService {
 
     public void deleteReservation(Long reservationId) {
         reservationRepository.deleteById(reservationId);
+
+    }
+
+
+    @Transactional
+    public void sendMail(){
+
+        List<ReservationEntity> reservationEntities = reservationRepository.findByStatus(true);
+
+        List<ReservationEntity> threeDayLeftReservations = reservationEntities.stream().filter(
+                (reservation)->{
+                    LocalDateTime checkInDate = reservation.getCheckInDate();
+
+                    long daysBetween = ChronoUnit.DAYS.between(LocalDate.now(), checkInDate);
+
+
+                    return daysBetween==5;
+                }
+        ).toList();
+
+        System.out.println(threeDayLeftReservations);
+
+        System.out.println("---------------------------------------");
+        System.out.println("Sizin rezervasiya ucun tutdugunuz otaga 3 gun qalib, odemek ucun linke kecin");
+        System.out.println("---------------------------------------");
+
+        System.out.println(reservationEntities);
+
 
     }
 

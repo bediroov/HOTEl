@@ -15,12 +15,9 @@ import org.springframework.web.bind.annotation.*;
 public class HotelController {
 
     private final HotelService hotelService;
-
     @PostMapping
     public HotelResponse saveHotel(@RequestBody @Valid HotelRequest hotelRequest) {
-
         System.out.println("stars:" + hotelRequest.getStars());
-
         return hotelService.createHotel(hotelRequest);
     }
 
@@ -30,12 +27,10 @@ public class HotelController {
         return hotelService.getHotelbyId(hotelId);
     }
 
-
     @PutMapping("/{hotelId}")
     public HotelResponse putHotel(@RequestBody HotelRequest hotelRequest, @PathVariable String hotelId) {
         return hotelService.updateHotel(hotelRequest, hotelId);
     }
-
 
     @DeleteMapping("/{hotelId}")
     public void deleteHotel(@PathVariable String hotelId) {

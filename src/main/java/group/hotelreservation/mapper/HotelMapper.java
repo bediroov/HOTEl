@@ -5,9 +5,7 @@ import group.hotelreservation.dto.hotel.response.HotelResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-
 @Mapper(componentModel = "spring",uses = RoomMapper.class)
-
 
 public abstract class HotelMapper {
 

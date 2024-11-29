@@ -5,9 +5,8 @@
 --     address VARCHAR(255),
 --     stars   VARCHAR(50)
 -- );
---
---
---
+
+
 -- CREATE TABLE rooms
 -- (
 --     id varchar(36) PRIMARY KEY,

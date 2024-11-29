@@ -1,18 +1,18 @@
 package group.hotelreservation.dao.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.util.List;
+
 
 
 @Entity
 @Table(name = "customers")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 
 
 public class CustomerEntity {
@@ -25,10 +25,10 @@ public class CustomerEntity {
 
     private String surname;
 
-
     private Integer age;
 
     private String email;
+
     private String phonenumber;
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)

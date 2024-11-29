@@ -3,17 +3,16 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import group.hotelreservation.enums.RoomType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.List;
 
 @Entity
 @Table(name = "rooms")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 
 
 public class RoomEntity {
@@ -21,7 +20,6 @@ public class RoomEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -31,7 +29,7 @@ public class RoomEntity {
 
     private boolean status;
 
-    @OneToMany(mappedBy = "room",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "room",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonBackReference
     private List<ReservationEntity> reservations;
 

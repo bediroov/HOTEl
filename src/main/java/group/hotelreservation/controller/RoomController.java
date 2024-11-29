@@ -1,13 +1,12 @@
 package group.hotelreservation.controller;
-
 import group.hotelreservation.dto.room.request.RoomRequest;
 import group.hotelreservation.dto.room.response.RoomResponse;
 import group.hotelreservation.service.RoomService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 
 
 @RestController
@@ -24,7 +23,6 @@ public class RoomController {
     public RoomResponse saveRooms(@RequestBody @Valid RoomRequest roomRequest) {
         return roomService.saveRoom(roomRequest);
     }
-
 
     @GetMapping
     public List<RoomResponse> getAllRooms() {

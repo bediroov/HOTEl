@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/receptionists")
 @RequiredArgsConstructor
@@ -17,7 +16,6 @@ public class ReceptionistController {
 
 
     private final ReceptionistService receptionistService;
-
 
     @PostMapping
     public ReceptionistResponse saveAllReceptionists(@RequestBody @Valid ReceptionistRequest receptionistRequest) {
@@ -36,12 +34,10 @@ public class ReceptionistController {
     }
 
 
-
     @PutMapping("/{receptionistId}")
     public ReceptionistResponse putReceptionist(@RequestBody ReceptionistRequest receptionistRequest, @PathVariable Long receptionistId) {
         return receptionistService.updateReceptionist(receptionistRequest, receptionistId);
     }
-
 
 
     @DeleteMapping("/{receptionistId}")

@@ -1,4 +1,5 @@
 package group.hotelreservation.service;
+
 import group.hotelreservation.dao.entity.HotelEntity;
 import group.hotelreservation.dao.repository.HotelRepository;
 import group.hotelreservation.dto.hotel.request.HotelRequest;
