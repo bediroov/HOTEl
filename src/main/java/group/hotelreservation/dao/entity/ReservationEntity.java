@@ -15,15 +15,23 @@ import java.time.LocalDateTime;
 
 public class ReservationEntity {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime checkInDate;
-    private LocalDateTime checkOutDate;
-    private double total_price;
-    private boolean status;
 
-    private String paymentMethod; // Ödəmə metodu (məsələn, "credit card")
+    private LocalDateTime checkInDate; // Müştərinin giriş tarixi
+    private LocalDateTime checkOutDate; // Müştərinin çıxış tarixi
+
+    private boolean status; // Rezervasiyanın aktiv/inaktiv statusu
+
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now(); // Rezervasiyanın yaradılma tarixi
+
+//    private String paymentMethod; // Ödəmə metodu (məsələn, "credit card")
+//    private double total_price;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "room_id")
     @JsonManagedReference

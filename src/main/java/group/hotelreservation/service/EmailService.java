@@ -1,9 +1,16 @@
 package group.hotelreservation.service;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.IContext;
+
+import javax.naming.Context;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,32 +23,21 @@ import java.time.format.DateTimeFormatter;
 
 public class EmailService {
 
-
     private final JavaMailSender mailSender;
 
-    public void sendNotification(String toEmail, LocalDateTime start, LocalDateTime end) {
+    public void sendEmail(String to,String subject,String body){
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
 
-      // 30 dəqiqə sonra bitəcək
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-        // Start və end tarixlərini formatlayırıq
-        String startFormatted = start.format(formatter);
-        String endFormatted = end.format(formatter);
-
-        String subject = "Rezervasiya Bildirişi";
-        String message = String.format(" rezervasiyanız aşağıdakı vaxtlarda olacaq:\nBaşlanğıc: %s\nSon: %s", startFormatted, endFormatted);
-
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(toEmail); // Məqsədli email ünvanı
-        mailMessage.setSubject(subject); // Email başlığı
-        mailMessage.setText(message); // Email məzmunu
-
-
-        // Email göndəririk
-        mailSender.send(mailMessage);
-
-
-
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,"UTF-8");
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(body,true);
+            mailSender.send(mimeMessage);
+        } catch (MessagingException e) {
+            throw new RuntimeException("E-mail göndərilə bilmədi",e);
+        }
     }
+
+
 }

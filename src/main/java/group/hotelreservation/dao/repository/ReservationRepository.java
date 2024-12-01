@@ -11,10 +11,8 @@ import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<ReservationEntity, Long> {
 
-    @Query("select r from ReservationEntity r where r.checkInDate between :start and :end and r.status=false")
-    List<ReservationEntity>
-    findReservationsTwodaysBefore(@Param("start") LocalDateTime start,
-                                  @Param("end") LocalDateTime end);
+    List<ReservationEntity> findByStatus(Boolean status);
 
+    List<ReservationEntity> findAllByCheckInDateBetween(LocalDateTime start, LocalDateTime end);
 
 }

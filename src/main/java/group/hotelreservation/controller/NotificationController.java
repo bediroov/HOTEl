@@ -1,10 +1,11 @@
 package group.hotelreservation.controller;
-import group.hotelreservation.service.EmailService;
+
+import group.hotelreservation.service.EmailVerificationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/email")
@@ -13,20 +14,11 @@ import java.time.LocalDateTime;
 public class NotificationController {
 
 
-    private final EmailService emailService;
+    private final EmailVerificationService emailVerificationService;
 
-    @GetMapping("/send-notification")
-    public String sendNotification() {
-
-        LocalDateTime start = LocalDateTime.now(); // Bu anın vaxtı
-        LocalDateTime end = start.plusHours(2); // 30 dəqiqə sonra bitəcək
-
-        // Email göndəririk
-        emailService.sendNotification("hafizbedirov11@gmail.com", start, end);
-
-        return "Notification email sent successfully!";
+    @PostMapping("/send-notification")
+    public ResponseEntity<String> sendNotification() {
+        emailVerificationService.notifyCustomers();
+        return ResponseEntity.ok("Bildiriisler gonderildi");
     }
-
-
-
 }

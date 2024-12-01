@@ -67,8 +67,6 @@ public class ReservationService {
 
         existReservation.setCheckInDate(reservationRequest.getCheckInDate());
         existReservation.setCheckOutDate(reservationRequest.getCheckOutDate());
-        existReservation.setTotal_price(reservationRequest.getTotal_price());
-        existReservation.setPaymentMethod(reservationRequest.getPaymentMethod());
 
         reservationRepository.save(existReservation);
         return reservationMapper.mapToReservationResponse(existReservation);
