@@ -1,4 +1,5 @@
 package group.hotelreservation.service;
+
 import group.hotelreservation.dao.entity.CustomerEntity;
 import group.hotelreservation.dao.entity.ReservationEntity;
 import group.hotelreservation.dao.entity.RoomEntity;
@@ -30,13 +31,12 @@ public class ReservationService {
     private final CustomerRepository customerRepository;
 
 
-
     public ReservationResponse createReservation(ReservationRequest reservationRequest) {
         RoomEntity room = roomRepository.findById(reservationRequest.getRoomId()).orElseThrow(() -> {
             throw new RuntimeException("ROOM_NOT_FOUND");
         });
 
-        CustomerEntity customer = customerRepository.findById(reservationRequest.getCustomerId()).orElseThrow(()->{
+        CustomerEntity customer = customerRepository.findById(reservationRequest.getCustomerId()).orElseThrow(() -> {
             throw new RuntimeException("Customer not found");
         });
 
@@ -76,34 +76,6 @@ public class ReservationService {
 
     public void deleteReservation(Long reservationId) {
         reservationRepository.deleteById(reservationId);
-
-    }
-
-
-    @Transactional
-    public void sendMail(){
-
-        List<ReservationEntity> reservationEntities = reservationRepository.findByStatus(true);
-
-        List<ReservationEntity> threeDayLeftReservations = reservationEntities.stream().filter(
-                (reservation)->{
-                    LocalDateTime checkInDate = reservation.getCheckInDate();
-
-                    long daysBetween = ChronoUnit.DAYS.between(LocalDate.now(), checkInDate);
-
-
-                    return daysBetween==5;
-                }
-        ).toList();
-
-        System.out.println(threeDayLeftReservations);
-
-        System.out.println("---------------------------------------");
-        System.out.println("Sizin rezervasiya ucun tutdugunuz otaga 3 gun qalib, odemek ucun linke kecin");
-        System.out.println("---------------------------------------");
-
-        System.out.println(reservationEntities);
-
 
     }
 

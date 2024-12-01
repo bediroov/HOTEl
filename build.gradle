@@ -42,7 +42,11 @@ dependencies {
 
 
 
+    // Email Service
+    implementation 'org.springframework.boot:spring-boot-starter-mail:3.3.1'
 
+    // ThymeLeaf for sending email html
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
 
 tasks.named('test') {
