@@ -1,37 +1,31 @@
 package group.hotelreservation.service;
-
 import group.hotelreservation.dao.entity.ReservationEntity;
 import group.hotelreservation.dao.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
-
 
 @RequiredArgsConstructor
 @Slf4j
 @Service
 
-public class EmailVerificationService {
-
+public class NotficationService {
 
     public final ReservationRepository reservationRepository;
     public final EmailService emailService;
 
     public void notifyCustomers() {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime start = now.plusMinutes(20).withMinute(0).withSecond(0);
-        LocalDateTime end = now.plusMinutes(50).withMinute(59).withSecond(59);
+        LocalDate today = LocalDate.now().plusDays(0);
+        List<ReservationEntity> todayReservation = reservationRepository.findReservationsForToday(today);
 
-        List<ReservationEntity> reservationEntities = reservationRepository.findAllByCheckInDateBetween(start, end);
-
-        for (ReservationEntity reservation : reservationEntities) {
+        for (ReservationEntity reservation : todayReservation) {
+            System.out.println(reservation.getId());
             String email = reservation.getCustomer().getEmail();
             String subject = "Rezervasiya Xatırlatması";
             String body = String.format(
-                    "Salam %s ,Reservasiyaniza yarm saat qalb.Detallar:Check-in: %s, Check-out: %s.",
+                    "Salam %s , Salam Reside Reservasiyaniz  .Detallar:Check-in: %s, Check-out: %s.",
                     reservation.getCustomer().getName(),
                     reservation.getCheckInDate(),
                     reservation.getCheckOutDate()
@@ -43,4 +37,9 @@ public class EmailVerificationService {
 
     }
 
+//    public void notifyCustomers() {
+//        emailService.sendEmail("mahammad.code@gmail.com",
+//                "TEST_EMAIL",
+//                "Reservation notfication !!!");
+//    }
 }

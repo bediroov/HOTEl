@@ -11,8 +11,11 @@ import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<ReservationEntity, Long> {
 
-    List<ReservationEntity> findByStatus(Boolean status);
+//    List<ReservationEntity> findByStatus(Boolean status);
 
-    List<ReservationEntity> findAllByCheckInDateBetween(LocalDateTime start, LocalDateTime end);
+    //
+    List<ReservationEntity> findAllByCheckInDateBetweenAndStatus(LocalDateTime start, LocalDateTime end,boolean status);
 
+    @Query("SELECT r FROM ReservationEntity r WHERE FUNCTION('DATE', r.checkInDate) = :today")
+    List<ReservationEntity> findReservationsForToday(@Param("today") LocalDate today);
 }
